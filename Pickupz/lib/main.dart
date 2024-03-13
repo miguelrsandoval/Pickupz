@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/pages/auth.dart';
 import 'package:myapp/pages/map.dart';
 
 void main() {
@@ -6,7 +7,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key); // Fixed the syntax here
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,52 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const MapPage(),
+      home: const MyTabs(), // Use the MyTabs widget as the home
+    );
+  }
+}
+
+class MyTabs extends StatelessWidget {
+  const MyTabs({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 3, 
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Pickupz'),
+          bottom: const TabBar(
+            isScrollable: false,
+            tabs: [
+              Tab(icon: Icon(Icons.map)),
+              Tab(icon: Icon(Icons.home)),
+              Tab(icon: Icon(Icons.account_circle)), 
+            ],
+          ),
+        ),
+        body: const TabBarView(
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            MapPage(),
+            HomePage(),
+            Auth(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: const Center(
+        child: Text('This is the home page'),
+      ),
     );
   }
 }
