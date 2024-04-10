@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/firebase.dart'; // Import your firebase service file
 
 class Auth extends StatefulWidget {
   const Auth({Key? key}) : super(key: key);
@@ -16,13 +17,14 @@ class _AuthState extends State<Auth> {
     final String email = _emailController.text.trim();
     final String password = _passwordController.text.trim();
 
-    // Perform authentication logic here
+    // Call your registerUser function for signup or login
     if (_isLogin) {
       // Login logic
+      // Replace this with your login logic if needed
       print('Logging in with email: $email, password: $password');
     } else {
       // Signup logic
-      print('Signing up with email: $email, password: $password');
+      registerUser(email, password); // Call registerUser from FirebaseService
     }
   }
 
