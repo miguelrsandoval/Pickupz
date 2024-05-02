@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/pages/auth.dart';
+import 'place_search.dart'; 
 import 'package:myapp/pages/map.dart';
+import 'package:myapp/pages/widget_tree.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -19,7 +24,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const MyTabs(), // Use the MyTabs widget as the home
+      home: const MyTabs(),
     );
   }
 }
@@ -30,7 +35,7 @@ class MyTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3, 
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Pickupz'),
@@ -39,31 +44,18 @@ class MyTabs extends StatelessWidget {
             tabs: [
               Tab(icon: Icon(Icons.map)),
               Tab(icon: Icon(Icons.home)),
-              Tab(icon: Icon(Icons.account_circle)), 
+              Tab(icon: Icon(Icons.account_circle)),
             ],
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           physics: NeverScrollableScrollPhysics(),
           children: [
-            MapPage(),
-            HomePage(),
-            Auth(),
+            const MapPage(),
+            PlaceListPage(),
+            const WidgetTree(),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: const Center(
-        child: Text('This is the home page'),
       ),
     );
   }
