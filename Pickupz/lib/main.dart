@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/pages/auth.dart';
-import 'place_search.dart'; 
 import 'package:myapp/pages/map.dart';
 import 'package:myapp/pages/widget_tree.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:myapp/pages/counter.dart';
+
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,7 +52,7 @@ class MyTabs extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           children: [
             const MapPage(),
-            PlaceListPage(),
+            MyHomePage(),
             const WidgetTree(),
           ],
         ),
